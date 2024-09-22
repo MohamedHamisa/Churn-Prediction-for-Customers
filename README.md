@@ -4,15 +4,15 @@ This project aims to analyze customer churn data from a telecommunications compa
 Dataset Overview
 The dataset contains information about telecommunications customers, their usage patterns, subscription details, and whether they have churned (left the service). Below are the key columns:
 
-customerID: Unique customer ID
-gender: Customer's gender
-SeniorCitizen: Whether the customer is a senior citizen (1 or 0)
-tenure: Number of months the customer has stayed with the company
-Contract: Contract type (Month-to-month, One year, Two year)
-PaymentMethod: Customer’s payment method
-MonthlyCharges: Monthly bill
-TotalCharges: Total amount charged to the customer
-Churn: Whether the customer has churned (Yes or No)
+#customerID: Unique customer ID
+#gender: Customer's gender
+#SeniorCitizen: Whether the customer is a senior citizen (1 or 0)
+#tenure: Number of months the customer has stayed with the company
+#Contract: Contract type (Month-to-month, One year, Two year)
+#PaymentMethod: Customer’s payment method
+#MonthlyCharges: Monthly bill
+#TotalCharges: Total amount charged to the customer
+#Churn: Whether the customer has churned (Yes or No)
 Project Workflow
 1. Data Preprocessing
 Handling missing values
