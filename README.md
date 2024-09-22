@@ -1,105 +1,81 @@
 # Churn-Prediction-for-Customers
-This project analyzes customer churn data from a fictional telecommunications company. The goal is to understand patterns of customer churn, including what factors might influence it and how different customer segments are impacted.
+This project aims to analyze customer churn data from a telecommunications company to uncover factors influencing customer churn and explore patterns using SQL queries, Python, and data visualization techniques.
 
-Dataset
-The dataset used in this project is the Telco Customer Churn dataset. It contains the following columns:
+Dataset Overview
+The dataset contains information about telecommunications customers, their usage patterns, subscription details, and whether they have churned (left the service). Below are the key columns:
 
-customerID: Unique ID for each customer
-gender: Gender of the customer
-SeniorCitizen: Indicates if the customer is a senior citizen (1 or 0)
-Partner: Indicates if the customer has a partner (Yes or No)
-Dependents: Indicates if the customer has dependents (Yes or No)
+customerID: Unique customer ID
+gender: Customer's gender
+SeniorCitizen: Whether the customer is a senior citizen (1 or 0)
 tenure: Number of months the customer has stayed with the company
-PhoneService: Indicates if the customer has phone service (Yes or No)
-MultipleLines: Indicates if the customer has multiple lines (Yes, No, No phone service)
-InternetService: Type of internet service (DSL, Fiber optic, No)
-OnlineSecurity: Indicates if the customer has online security (Yes, No, No internet service)
-OnlineBackup: Indicates if the customer has online backup (Yes, No, No internet service)
-DeviceProtection: Indicates if the customer has device protection (Yes, No, No internet service)
-TechSupport: Indicates if the customer has tech support (Yes, No, No internet service)
-StreamingTV: Indicates if the customer has streaming TV service (Yes, No, No internet service)
-StreamingMovies: Indicates if the customer has streaming movie service (Yes, No, No internet service)
 Contract: Contract type (Month-to-month, One year, Two year)
-PaperlessBilling: Indicates if the customer uses paperless billing (Yes or No)
-PaymentMethod: Payment method (Electronic check, Mailed check, Bank transfer (automatic), Credit card (automatic))
-MonthlyCharges: The amount charged to the customer monthly
-TotalCharges: The total amount charged to the customer
-Churn: Indicates if the customer has churned (Yes or No)
+PaymentMethod: Customer’s payment method
+MonthlyCharges: Monthly bill
+TotalCharges: Total amount charged to the customer
+Churn: Whether the customer has churned (Yes or No)
 Project Workflow
-Loading Data: The dataset is first loaded into a Pandas DataFrame and preprocessed, including handling missing values, encoding categorical variables, and correcting data types.
-
-SQL Integration: After data preprocessing, the dataset is uploaded into a SQLite database to perform SQL-based data analysis.
-
-SQL Queries: Key insights are extracted from the dataset using SQL queries, and these results are analyzed to draw meaningful conclusions.
-
-SQL Analysis
+1. Data Preprocessing
+Handling missing values
+Converting categorical data into numerical representations for analysis
+Removing irrelevant columns (e.g., customerID)
+Feature scaling and encoding for machine learning
+2. SQL Analysis
+Data loaded into SQLite for advanced querying
+Key insights are drawn by running SQL queries on the dataset
+3. Visualizations
+Multiple visualizations are generated to support the SQL-based analysis, such as:
+Churn distribution
+Monthly Charges distribution
+Contract types vs. Churn
+Key SQL Queries for Analysis
 1. Count Total Customers
 sql
 Copy code
 SELECT COUNT(*) AS total_customers FROM telco_churn;
-This query returns the total number of customers in the dataset.
-
 2. Churn Count
 sql
 Copy code
-SELECT Churn, COUNT(*) AS count
+SELECT Churn, COUNT(*) AS churn_count
 FROM telco_churn
 GROUP BY Churn;
-This query counts how many customers have churned (Yes) vs. those who have not (No).
-
 3. Average Tenure by Churn
 sql
 Copy code
-SELECT Churn, AVG(tenure) AS average_tenure
+SELECT Churn, AVG(tenure) AS avg_tenure
 FROM telco_churn
 GROUP BY Churn;
-This query calculates the average tenure of customers who churned and those who didn’t.
-
-4. Distribution by Payment Method
+4. Customers by Payment Method
 sql
 Copy code
 SELECT PaymentMethod, COUNT(*) AS count
 FROM telco_churn
 GROUP BY PaymentMethod
 ORDER BY count DESC;
-This query returns the distribution of customers across different payment methods.
-
-5. Monthly Charges Distribution
-sql
-Copy code
-SELECT ROUND(MonthlyCharges, 2) AS charge_range, COUNT(*) AS count
-FROM telco_churn
-GROUP BY charge_range
-ORDER BY charge_range;
-This query groups monthly charges into ranges to understand customer distribution by charge amounts.
-
 Setup Instructions
-To run this project on your local machine, follow these steps:
-
 Prerequisites
+Before running the project, ensure you have the following installed:
+
 Python 3.x
-SQLite 3.x (included with Python)
+SQLite 3.x (comes pre-installed with Python)
 Required Python libraries:
 pandas
 matplotlib
 seaborn
-sqlite3 (Python's standard library)
-Steps to Run
-Clone the repository:
-
+sqlite3 (built-in with Python)
+Steps to Run the Project Locally
+1. Clone the repository:
 bash
 Copy code
 git clone https://github.com/your-username/telco-customer-churn-analysis.git
 cd telco-customer-churn-analysis
-Install the required libraries:
-
+2. Install the required Python libraries:
 bash
 Copy code
 pip install pandas matplotlib seaborn
-Load the dataset into SQLite using the script:
-
-python
+3. Load the dataset into a SQLite database:
+bash
 Copy code
+# Python script to load data into SQLite
 import pandas as pd
 import sqlite3
 
@@ -107,31 +83,39 @@ import sqlite3
 file_path = 'WA_Fn-UseC_-Telco-Customer-Churn.csv'
 df = pd.read_csv(file_path)
 
-# Connect to SQLite (or create it)
+# Connect to SQLite
 conn = sqlite3.connect('telco_customer_churn.db')
 
-# Write the data to a SQLite table
+# Write the data to a SQL table
 df.to_sql('telco_churn', conn, if_exists='replace', index=False)
 
 # Close the connection
 conn.close()
-Run the SQL queries provided in the SQL Analysis section to explore the data and extract insights.
+4. Run SQL Queries:
+You can run the SQL queries provided above within SQLite or using Python to fetch insights from the dataset.
 
-(Optional) Visualize the results using matplotlib and seaborn:
+Visualizations
+This project also includes visualizations to provide better insights into churn behavior and customer attributes.
 
+Churn Distribution Visualization (Python example):
 python
 Copy code
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-# Example: Visualize churn count
-sns.barplot(x='Churn', y='count', data=churn_count)
-plt.title('Churn Count')
-plt.xlabel('Churn Status (1=Yes, 0=No)')
+sns.countplot(x='Churn', data=df)
+plt.title('Churn Distribution')
+plt.xlabel('Churn')
 plt.ylabel('Count')
 plt.show()
 Insights
-Churn Distribution: Understanding the ratio of churned vs. non-churned customers.
+Churn Rate: The churn rate in the dataset is around X%.
+Tenure Impact: Customers with shorter tenures are more likely to churn, particularly those on Month-to-month contracts.
+Payment Method Correlation: Customers using Electronic check are more likely to churn compared to those using Bank transfer or Credit card.
+Conclusion
+This project successfully demonstrates how SQL and Python can be leveraged to analyze customer churn, identify key factors influencing churn, and visualize the results for better decision-making.
+
+
 Average Tenure: Customers who churn have an average tenure of X months, compared to Y months for those who stay.
 Payment Method: The most common payment method is Electronic check, followed by Mailed check and Bank transfer.
 Monthly Charges: Monthly charges are skewed, with a significant number of customers falling in certain charge ranges.
