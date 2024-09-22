@@ -1,5 +1,5 @@
 ```markdown
-# Churn Prediction for Customers
+##Churn Prediction for Customers
 
 This project analyzes customer churn data for a telecom company. The goal is to understand the factors influencing churn and discover patterns using SQL queries and Python-based data analysis.
 
