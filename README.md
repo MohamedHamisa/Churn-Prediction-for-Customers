@@ -1,8 +1,5 @@
-# Churn-Prediction-for-Customers
-Here’s an updated version with a more general license section:
-
 ```markdown
-# Telecom Customer Churn Analysis Project
+# Churn Prediction for Customers
 
 This project analyzes customer churn data for a telecom company. The goal is to understand the factors influencing churn and discover patterns using SQL queries and Python-based data analysis.
 
